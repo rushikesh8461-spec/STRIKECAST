@@ -1,0 +1,10 @@
+runtime_mode: DEMO
+demo_model:
+  architecture: ConvLSTMClassifier
+  artifact: artifacts/models/demo/strikecast_convlstm_demo.pt
+  model_status: DEMO_ONLY
+live_model:
+  status: UNAVAILABLE
+  requires_dataset_acceptance: true
+  requires_held_out_evaluation: true
+  requires_calibration: true

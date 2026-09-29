@@ -1,0 +1,48 @@
+{
+  "generated_at": "2026-09-28T21:44:08Z",
+  "config_grid": {
+    "lat_min": 18.0,
+    "lat_max": 22.0,
+    "lon_min": 77.0,
+    "lon_max": 81.0,
+    "lat_resolution_deg": 0.25,
+    "lon_resolution_deg": 0.25
+  },
+  "config_demo_params": {
+    "random_seed": 42,
+    "n_timestamps": 12,
+    "timestep_minutes": 60,
+    "start_time_utc": "2026-06-01T00:00:00Z",
+    "lightning_strikes_per_timestep_mean": 40
+  },
+  "sources": {
+    "satellite": {
+      "source_id": "mock_geostationary_ir_v1",
+      "dataset_version": "0.1.0-demo",
+      "quality_status": "ok",
+      "npz_path": "demo\\research_multimodal\\satellite\\mock_geostationary_ir_v1_20260601T000000Z_20260601T110000Z.npz",
+      "json_path": "demo\\research_multimodal\\satellite\\mock_geostationary_ir_v1_20260601T000000Z_20260601T110000Z.json"
+    },
+    "lightning": {
+      "source_id": "mock_lightning_network_v1",
+      "dataset_version": "0.1.0-demo",
+      "quality_status": "ok",
+      "npz_path": "demo\\research_multimodal\\lightning\\mock_lightning_network_v1_20260601T000000Z_20260601T110000Z.npz",
+      "json_path": "demo\\research_multimodal\\lightning\\mock_lightning_network_v1_20260601T000000Z_20260601T110000Z.json"
+    },
+    "nwp": {
+      "source_id": "mock_nwp_reanalysis_v1",
+      "dataset_version": "0.1.0-demo",
+      "quality_status": "ok",
+      "npz_path": "demo\\research_multimodal\\nwp\\mock_nwp_reanalysis_v1_20260601T000000Z_20260601T110000Z.npz",
+      "json_path": "demo\\research_multimodal\\nwp\\mock_nwp_reanalysis_v1_20260601T000000Z_20260601T110000Z.json"
+    },
+    "radar": {
+      "source_id": "mock_radar_reflectivity_v1",
+      "dataset_version": "0.1.0-demo",
+      "quality_status": "ok",
+      "npz_path": "demo\\research_multimodal\\radar\\mock_radar_reflectivity_v1_20260601T000000Z_20260601T110000Z.npz",
+      "json_path": "demo\\research_multimodal\\radar\\mock_radar_reflectivity_v1_20260601T000000Z_20260601T110000Z.json"
+    }
+  }
+}

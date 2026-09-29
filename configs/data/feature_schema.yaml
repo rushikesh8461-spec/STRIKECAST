@@ -1,0 +1,50 @@
+schema_version: strikecast-era5-feature-schema-v1
+status: CANDIDATE_SCHEMA_ONLY_NOT_YET_PAIRED
+grid:
+  north: 20
+  south: 8
+  west: 72
+  east: 82
+  atmospheric_resolution_degrees: 0.25
+  canonical_order: source_then_variable_then_pressure_level
+temporal:
+  cadence_minutes: 60
+  sequence_length: 4
+  forecast_horizon_steps: 1
+  input_hours_for_lis_target_hour_h: ["h-3", "h-2", "h-1", "h"]
+  require_source_availability_at_or_before_issue_time: true
+  no_temporal_interpolation: true
+sources:
+  era5_single_levels:
+    provider: ECMWF ERA5
+    fields:
+      - {id: u10, grib_short_name: 10u, units: m s-1, temporal_semantics: instantaneous}
+      - {id: v10, grib_short_name: 10v, units: m s-1, temporal_semantics: instantaneous}
+      - {id: t2m, grib_short_name: 2t, units: K, temporal_semantics: instantaneous}
+      - {id: d2m, grib_short_name: 2d, units: K, temporal_semantics: instantaneous}
+      - {id: msl, grib_short_name: msl, units: Pa, temporal_semantics: instantaneous}
+      - {id: sp, grib_short_name: sp, units: Pa, temporal_semantics: instantaneous}
+      - {id: tp, grib_short_name: tp, units: m, temporal_semantics: accumulated_step_must_be_checked}
+      - {id: tcc, grib_short_name: tcc, units: 1, temporal_semantics: instantaneous}
+      - {id: blh, grib_short_name: blh, units: m, temporal_semantics: instantaneous}
+      - {id: cbh, grib_short_name: cbh, units: m, temporal_semantics: forecast_step_must_be_checked}
+      - {id: skt, grib_short_name: skt, units: K, temporal_semantics: instantaneous}
+  era5_pressure_levels:
+    provider: ECMWF ERA5
+    levels_hpa: [1000, 925, 850, 700, 500, 300, 200]
+    fields:
+      - {id: temperature, grib_short_name: t, units: K}
+      - {id: relative_humidity, grib_short_name: r, units: percent}
+      - {id: u_wind, grib_short_name: u, units: m s-1}
+      - {id: v_wind, grib_short_name: v, units: m s-1}
+      - {id: vertical_velocity, grib_short_name: w, units: Pa s-1}
+      - {id: geopotential, grib_short_name: z, units: m2 s-2}
+normalization:
+  method: z_score
+  fit_split: train
+  missing_feature_policy: preserve_mask_then_train_mean_fill
+target:
+  schema_version: lightning_occurrence_at_horizon_v1
+  interval: half_open
+  unknown_policy: require_target_observation_mask_and_exclude_from_loss_metrics
+  negative_requires_complete_quality_accepted_lis_viewtime: true

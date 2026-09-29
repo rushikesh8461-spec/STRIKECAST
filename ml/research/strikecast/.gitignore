@@ -1,0 +1,16 @@
+__pycache__/
+*.pyc
+.pytest_cache/
+.venv/
+venv/
+.env
+checkpoints/
+*.egg-info/
+.DS_Store
+
+# Raw/interim data caches are regenerable and can be large — keep only
+# sample_demo/ (small, deterministic) under version control.
+data/raw/**
+data/interim/**
+!data/raw/.gitkeep
+!data/interim/.gitkeep

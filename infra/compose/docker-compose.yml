@@ -1,0 +1,49 @@
+services:
+  api:
+    build:
+      context: ../..
+      dockerfile: infra/docker/api.Dockerfile
+    image: strikecast-api:local
+    environment:
+      HOST: 0.0.0.0
+      PORT: 8000
+      STRIKECAST_MODE: ${STRIKECAST_MODE:-DEMO}
+      CORS_ORIGINS: ${CORS_ORIGINS:-http://localhost:5173}
+      MAX_REQUEST_BYTES: ${MAX_REQUEST_BYTES:-1048576}
+      RATE_LIMIT_REQUESTS: ${RATE_LIMIT_REQUESTS:-120}
+      RATE_LIMIT_WINDOW_SECONDS: ${RATE_LIMIT_WINDOW_SECONDS:-60}
+      MAX_RATE_LIMIT_CLIENTS: ${MAX_RATE_LIMIT_CLIENTS:-4096}
+      RISK_POLICY_VERSION: ${RISK_POLICY_VERSION:-provisional-1}
+      RISK_MODERATE_THRESHOLD: ${RISK_MODERATE_THRESHOLD:-0.35}
+      RISK_HIGH_THRESHOLD: ${RISK_HIGH_THRESHOLD:-0.60}
+      RISK_SEVERE_THRESHOLD: ${RISK_SEVERE_THRESHOLD:-0.80}
+      LIGHTNING_MODE: ${LIGHTNING_MODE:-demo}
+      LIGHTNING_FEED_URL: ${LIGHTNING_FEED_URL:-}
+      LIGHTNING_FEED_ALLOWED_HOSTS: ${LIGHTNING_FEED_ALLOWED_HOSTS:-}
+      LIGHTNING_FEED_BEARER: ${LIGHTNING_FEED_BEARER:-}
+    ports:
+      - "8000:8000"
+    healthcheck:
+      test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://127.0.0.1:8000/health', timeout=3)"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+      start_period: 20s
+  web:
+    build:
+      context: ../../apps/web
+      dockerfile: Dockerfile
+      args:
+        VITE_API_BASE_URL: ${VITE_API_BASE_URL:-http://localhost:8000}
+        VITE_RISK_FIELD_RADIUS_KM: ${VITE_RISK_FIELD_RADIUS_KM:-80}
+    image: strikecast-web:local
+    ports:
+      - "5173:80"
+    depends_on:
+      api:
+        condition: service_healthy
+    healthcheck:
+      test: ["CMD", "wget", "-q", "-O", "/dev/null", "http://127.0.0.1/"]
+      interval: 30s
+      timeout: 3s
+      retries: 3

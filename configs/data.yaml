@@ -1,0 +1,9 @@
+providers:
+  atmospheric: Open-Meteo (optional live provider; not used by DEMO serving)
+  lightning: none (DEMO presentations are marked simulation)
+demo:
+  deterministic: true
+  reference_timestamp: 2026-01-01T00:00:00Z
+real_dataset:
+  required_status: NOT_READY
+  acceptance_contract: docs/data/DATASET_CONTRACT.md

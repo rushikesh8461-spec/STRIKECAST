@@ -1,0 +1,11 @@
+schema_version: strikecast-acceptance-v1
+status: BLOCKED_UNTIL_REAL_DATA
+evaluation_split: test
+calibration_split: validation
+threshold_selection_split: validation
+required_splits: [train, validation, test]
+require_observed_class_diversity: true
+require_source_checksums: true
+require_inference_compatibility: true
+require_api_smoke_test: true
+production_promotion_enabled: false

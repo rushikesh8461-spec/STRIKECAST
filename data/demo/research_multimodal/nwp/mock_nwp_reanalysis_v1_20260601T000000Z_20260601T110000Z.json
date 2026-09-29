@@ -1,0 +1,105 @@
+{
+  "source": "nwp",
+  "source_id": "mock_nwp_reanalysis_v1",
+  "dataset_version": "0.1.0-demo",
+  "n_timestamps": 12,
+  "timestamp_start": "2026-06-01T00:00:00Z",
+  "timestamp_end": "2026-06-01T11:00:00Z",
+  "grid": {
+    "lat_min": 18.0,
+    "lat_max": 22.0,
+    "lon_min": 77.0,
+    "lon_max": 81.0,
+    "lat_resolution_deg": 0.25,
+    "lon_resolution_deg": 0.25,
+    "n_lat": 17,
+    "n_lon": 17
+  },
+  "variables": [
+    {
+      "name": "temperature_2m",
+      "unit": "K",
+      "dtype": "float32",
+      "valid_min": 200.0,
+      "valid_max": 330.0,
+      "fill_value": -9999.0,
+      "description": "2m air temperature."
+    },
+    {
+      "name": "relative_humidity",
+      "unit": "%",
+      "dtype": "float32",
+      "valid_min": 0.0,
+      "valid_max": 100.0,
+      "fill_value": -9999.0,
+      "description": "Relative humidity."
+    },
+    {
+      "name": "surface_pressure",
+      "unit": "hPa",
+      "dtype": "float32",
+      "valid_min": 850.0,
+      "valid_max": 1050.0,
+      "fill_value": -9999.0,
+      "description": "Surface-level pressure."
+    },
+    {
+      "name": "wind_u",
+      "unit": "m/s",
+      "dtype": "float32",
+      "valid_min": -60.0,
+      "valid_max": 60.0,
+      "fill_value": -9999.0,
+      "description": "Eastward wind component (10m)."
+    },
+    {
+      "name": "wind_v",
+      "unit": "m/s",
+      "dtype": "float32",
+      "valid_min": -60.0,
+      "valid_max": 60.0,
+      "fill_value": -9999.0,
+      "description": "Northward wind component (10m)."
+    },
+    {
+      "name": "cape",
+      "unit": "J/kg",
+      "dtype": "float32",
+      "valid_min": 0.0,
+      "valid_max": 8000.0,
+      "fill_value": -9999.0,
+      "description": "Convective Available Potential Energy."
+    },
+    {
+      "name": "cin",
+      "unit": "J/kg",
+      "dtype": "float32",
+      "valid_min": -1000.0,
+      "valid_max": 0.0,
+      "fill_value": -9999.0,
+      "description": "Convective Inhibition."
+    }
+  ],
+  "quality": {
+    "source": "nwp",
+    "generated_at": "2026-09-28T21:44:08Z",
+    "timestamp_range": [
+      "2026-06-01T00:00:00Z",
+      "2026-06-01T11:00:00Z"
+    ],
+    "coverage_fraction": 1.0,
+    "missing_fraction": 0.00865051903114187,
+    "valid_fraction": 1.0,
+    "schema_status": "valid",
+    "quality_status": "ok",
+    "issues": []
+  },
+  "provenance": {
+    "source_id": "mock_nwp_reanalysis_v1",
+    "dataset_version": "0.1.0-demo",
+    "acquisition_method": "synthetic_generator",
+    "is_synthetic": true,
+    "ingested_at": "2026-09-28T21:44:08Z",
+    "notes": "Deterministic synthetic NWP-like field for SIH demo."
+  }
+}

@@ -1,0 +1,104 @@
+# StrikeCast — M2 Preprocessing & Feature Engineering Configuration
+# Safe to commit: no secrets live here. Mirrors the M1 convention in
+# config/ingestion_config.yaml (Phase 8 rule: no hard-coded paths/values
+# in source files).
+
+paths:
+  # Where M2 reads M1's output from (the manifest is the recommended,
+  # non-hard-coded entry point — see docs/m1_m2_contract.md).
+  data_root: "data"
+  sample_demo_subdir: "demo/research_multimodal"
+  raw_subdir: "raw"
+  processed_subdir: "processed/research"
+
+# --- Temporal alignment (Phase 4) ---
+temporal_alignment:
+  # If null, M2 infers the common grid's resolution as the finest
+  # (minimum) median per-source timestep found across all four sources,
+  # rather than arbitrarily assuming they match. Set explicitly to force
+  # a specific resolution.
+  target_resolution_minutes: null
+  # A per-source observation may be assigned to a common-grid slot if it
+  # falls within +/- this many minutes of that slot (handles small,
+  # legitimate cross-instrument timing offsets). Not a leakage boundary:
+  # the input/target leakage boundary is enforced later, in sequencing.
+  nearest_neighbor_tolerance_minutes: 15
+
+# --- Spatial alignment (Phase 5) ---
+spatial_alignment:
+  # If null, M2 uses whichever grid the M1 gridded sources already share
+  # (read from their GridSpec) as the target grid. Set explicitly
+  # (lat_min/lat_max/lon_min/lon_max/lat_resolution_deg/lon_resolution_deg)
+  # to force regridding onto a different domain.
+  target_grid: null
+  # Nearest-neighbor is the simplest reliable method compatible with this
+  # repo's dependency footprint (Phase 5: "do not introduce heavyweight
+  # geospatial dependencies"). A fast identity path is used automatically
+  # when a source's native grid already matches the target grid exactly.
+  resampling_method: "nearest"
+
+# --- Missing-data handling (Phase 6) ---
+missing_data:
+  # Missing values are never temporally interpolated: two-sided interpolation
+  # would leak later observations into earlier input features. Windows whose
+  # invalid-input fraction exceeds this threshold are dropped.
+  max_missing_fraction_per_window: 0.25
+  # Value used to fill any remaining NaN in the final (normalized)
+  # feature tensor, so it can be stacked into a dense array. Paired with
+  # a boolean validity mask channel so the model can learn to discount
+  # filled cells rather than treat them as real zeros.
+  fill_value_after_normalization: 0.0
+  # An M1 record with quality_status == "failed" is excluded from this
+  # run entirely (per docs/m1_m2_contract.md) rather than silently used.
+  exclude_failed_records: true
+
+# --- Normalization (Phase 7) ---
+normalization:
+  method: "zscore"   # (x - mean) / std, stats from TRAIN split input-times only
+  std_floor: 1.0e-6
+  stats_filename: "normalization_stats.json"
+
+# --- Feature engineering (Phase 8) ---
+features:
+  # Base (directly-observed, post-alignment/cleaning) channels are always
+  # included. Derived/engineered channels are individually toggleable so
+  # M3 can run ablations without touching this module's code.
+  enabled_derived_features:
+    - wind_speed
+    - cape_dt
+    - cin_dt
+    - reflectivity_dt
+    - brightness_temperature_dt
+    - reflectivity_spatial_gradient_mag
+    - lightning_recent_count_3step
+  lightning_recent_count_window_steps: 3
+
+# --- Sequence / window construction (Phase 9) ---
+sequence:
+  sequence_length: 4      # L: number of past steps in each input window
+  forecast_horizon: 1     # H: number of future steps predicted
+  stride: 1                # step between consecutive window starts
+
+# --- Target construction (Phase 10) ---
+target:
+  # MVP assumption (no target definition existed anywhere in this repo —
+  # see docs/m2_m3_contract.md "Target definition" for the explicit
+  # rationale and how to change it): gridded lightning occurrence.
+  mode: "occurrence"        # "occurrence" (binary) or "strike_count" (continuous)
+  occurrence_threshold_strikes: 1   # >= this many strikes in a cell/step -> positive
+
+# --- Train / validation / test split (Phase 11) ---
+split:
+  # Fractions of the *aligned timestamp range* (not of window count) used
+  # as chronological cut points, PAST -> TRAIN, LATER -> VALIDATION,
+  # LATEST -> TEST. A window is assigned to a split only if its entire
+  # input+target time range lies within that split's time range; windows
+  # straddling a boundary are dropped (never duplicated, never leaked).
+  train_fraction: 0.6
+  val_fraction: 0.2
+  test_fraction: 0.2
+
+# --- Reproducibility (Phase 13) ---
+reproducibility:
+  preprocessing_version: "0.1.0-m2-mvp"
+  random_seed: 42

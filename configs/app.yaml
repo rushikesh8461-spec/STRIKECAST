@@ -1,0 +1,13 @@
+service:
+  name: strikecast-api
+  mode: DEMO
+  max_request_bytes: 1048576
+  rate_limit_requests: 120
+  rate_limit_window_seconds: 60
+  cors_origins:
+    - http://localhost:5173
+    - http://localhost:3000
+logging:
+  level: INFO
+  include_request_id: true
+  exclude_request_payloads: true

@@ -1,0 +1,20 @@
+{
+  "model": "StrikeCast-ConvLSTM-Demo",
+  "version": "1.0.0-trained-demo",
+  "sha256": "63150034a809d39a4f60f0003f1de7786d7e9a51457c114adc02a25123ce8cfb",
+  "feature_version": "point-feature-v1",
+  "feature_schema": [
+    "temperature_c",
+    "humidity_pct",
+    "pressure_hpa",
+    "wind_speed_ms",
+    "cape_jkg",
+    "cin_jkg",
+    "precipitation_mm_h",
+    "data_quality"
+  ],
+  "dataset": "synthetic/demo",
+  "dataset_version": "not independently released",
+  "status": "DEMO_ONLY",
+  "limitations": "Synthetic/demo-trained; no real-data evaluation, calibration, or forecast-skill evidence."
+}

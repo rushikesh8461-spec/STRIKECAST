@@ -1,0 +1,29 @@
+# Default configuration for the ConvLSTM MVP.
+# All values marked PLACEHOLDER pending M1/M2 contract confirmation
+# (see src/training/config.py docstrings for full rationale).
+
+data:
+  sequence_length: 6        # PLACEHOLDER (T)
+  input_channels: 1         # PLACEHOLDER (C)
+  height: 32                # PLACEHOLDER (H)
+  width: 32                 # PLACEHOLDER (W)
+  forecast_horizon: 1       # PLACEHOLDER
+  target_type: binary       # PLACEHOLDER — confirm with M1/M2
+  modalities: [radar]       # PLACEHOLDER — single modality for MVP
+
+train:
+  seed: 42
+  batch_size: 4
+  num_workers: 0
+  learning_rate: 0.001
+  weight_decay: 0.0
+  epochs: 5
+  optimizer: adam
+  loss: bce
+  conv_hidden_dims: [16, 16]
+  conv_kernel_size: 3
+  checkpoint_dir: checkpoints
+  checkpoint_every_n_epochs: 1
+  device: cpu
+  model_name: convlstm
+  model_version: 0.1.0

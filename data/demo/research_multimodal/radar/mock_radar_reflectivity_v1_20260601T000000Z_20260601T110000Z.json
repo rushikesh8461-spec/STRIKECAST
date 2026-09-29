@@ -1,0 +1,51 @@
+{
+  "source": "radar",
+  "source_id": "mock_radar_reflectivity_v1",
+  "dataset_version": "0.1.0-demo",
+  "n_timestamps": 12,
+  "timestamp_start": "2026-06-01T00:00:00Z",
+  "timestamp_end": "2026-06-01T11:00:00Z",
+  "grid": {
+    "lat_min": 18.0,
+    "lat_max": 22.0,
+    "lon_min": 77.0,
+    "lon_max": 81.0,
+    "lat_resolution_deg": 0.25,
+    "lon_resolution_deg": 0.25,
+    "n_lat": 17,
+    "n_lon": 17
+  },
+  "variables": [
+    {
+      "name": "reflectivity",
+      "unit": "dBZ",
+      "dtype": "float32",
+      "valid_min": -30.0,
+      "valid_max": 75.0,
+      "fill_value": -9999.0,
+      "description": "Composite radar reflectivity."
+    }
+  ],
+  "quality": {
+    "source": "radar",
+    "generated_at": "2026-09-28T21:44:08Z",
+    "timestamp_range": [
+      "2026-06-01T00:00:00Z",
+      "2026-06-01T11:00:00Z"
+    ],
+    "coverage_fraction": 1.0,
+    "missing_fraction": 0.01124567474048443,
+    "valid_fraction": 1.0,
+    "schema_status": "valid",
+    "quality_status": "ok",
+    "issues": []
+  },
+  "provenance": {
+    "source_id": "mock_radar_reflectivity_v1",
+    "dataset_version": "0.1.0-demo",
+    "acquisition_method": "synthetic_generator",
+    "is_synthetic": true,
+    "ingested_at": "2026-09-28T21:44:08Z",
+    "notes": "Deterministic synthetic reflectivity field for SIH demo. Real radar coverage is regional/intermittent in practice; this adapter is designed to degrade gracefully, not to assume nationwide coverage."
+  }
+}

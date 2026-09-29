@@ -1,0 +1,34 @@
+# ConvLSTM trained on REAL M2 data (bundled data/sample_demo/), instead of
+# SyntheticDataset. This is the integration path — see
+# src/training/m2_bridge.py and docs/m2_m3_integration.md.
+#
+# The `data:` block below is intentionally minimal: when train.data_source
+# is "m2", train.py replaces config.data entirely with a DataContract built
+# from the real M2 bundle (DataContract.from_m2_bundle) — sequence_length,
+# input_channels, height, width, forecast_horizon and target_type all come
+# from data/sample_demo + config/preprocessing_config.yaml, not from this
+# file. Whatever is written here is only used if data_source is switched
+# back to "synthetic".
+data:
+  target_type: binary   # matches M2's default target.mode: "occurrence"
+
+train:
+  seed: 42
+  batch_size: 2          # small: bundled demo data only yields 3 train windows
+  num_workers: 0
+  learning_rate: 0.001
+  weight_decay: 0.0
+  epochs: 5
+  optimizer: adam
+  loss: bce
+  conv_hidden_dims: [16, 16]
+  conv_kernel_size: 3
+  checkpoint_dir: checkpoints
+  checkpoint_every_n_epochs: 1
+  device: cpu
+  model_name: convlstm
+  model_version: 0.1.0-m2
+
+  data_source: m2
+  m2_preprocessing_config: null   # null = M2's own default (config/preprocessing_config.yaml)
+  m2_demo: true                   # true = bundled data/sample_demo/ (12 timesteps, 3 train / 0 val / 0 test windows)

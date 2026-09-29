@@ -1,0 +1,1 @@
+"""Canonical training command namespace."""

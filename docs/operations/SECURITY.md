@@ -1,0 +1,7 @@
+# Security status
+
+M5 applies coordinate/horizon/timestamp and grid bounds, a 1 MiB request-body limit, per-process fixed-window rate limiting, request IDs, generic validation/internal errors, response security headers, explicit CORS origins, and bounded request logs that omit payloads. Checkpoint loads are restricted to the pinned demo artifact and use PyTorch `weights_only=True`. M1 provider requests use HTTPS, a fixed Open-Meteo URL, timeouts, no redirects, content-type and response-size checks; lightning additionally requires an exact HTTPS host allowlist in live mode.
+
+Frontend review found no dynamic HTML insertion. API and geocoding responses are type/shape checked; external map/provider URLs are restricted/configured. No private credentials are included in the frontend build variables. npm audit last returned zero known vulnerabilities.
+
+Limitations: rate state is process-local (client-key count capped) and is not suitable as distributed abuse protection. No WAF, authentication/authorization, external penetration test, hosted CI run, or container runtime test has been completed. `pip-audit`/Ruff are not installed; attempting their installation failed because Python pip could not validate the local package-index certificate chain. TLS verification was not disabled. The repository scan found no committed private key or common token pattern; generated report output is redacted to avoid embedding workspace paths. Do not expose the demo service directly to an untrusted network.

@@ -1,0 +1,15 @@
+# Model feasibility
+
+Inventory is separated by execution role. The canonical served model is only the demo ConvLSTM adapter. Models under `ml/research/strikecast/src/models/` are research candidates and are not served or selected.
+
+| Model | Role/status | Parameters | Inputs / outputs | Runtime/training | Data requirements | Strengths / limitations | Validation |
+|---|---|---|---|---|---|---|---|
+| Persistence baseline | Baseline candidate (research) | No trainable parameters | Named lightning-count channel to binary occurrence grid | Lightweight inference; no fitting | Correct temporal labels/splits and TRAIN normalization statistics | Uses the last observed lightning occurrence; fails closed if the named channel/scaler is missing | Software tests and synthetic benchmark-fixture integration only; not evaluated on real lightning |
+| Classical logistic/ML | Research candidate | Data-dependent; not fitted at architecture construction | Flattened/engineered M2 windows to class probability | scikit-learn fit; checkpoint via research trainer | Adequate labeled samples and train-only preprocessing | Interpretable baseline potential; flattened spatial-temporal structure may be lost | Unit/training tests; no valid benchmark |
+| Histogram gradient boosting | Research baseline candidate | Data-dependent | Flattened/engineered M2 windows to cellwise probability | scikit-learn histogram gradient boosting | Adequate labeled samples and train-only preprocessing | Nonlinear tabular comparator; spatial-temporal structure is flattened | Software tests only; no eligible real-data benchmark |
+| Research ConvLSTM | Research candidate | 28,369 at default `DataContract`/`TrainConfig` | Multichannel `[B,T,C,H,W]` to future target grid | PyTorch, training/config/checkpoint code | Large, quality-controlled gridded sequence dataset | Spatial-temporal inductive bias; compute/data hungry and high overfit risk | Shape/training tests only |
+| Fusion ConvLSTM | Research candidate | 57,249 for two one-channel modalities at default architecture | Per-modality tensors to target grid | PyTorch fusion model | Aligned, synchronized, provenance-bearing multimodal data | Can combine modalities; needs reliable alignment and missing-modality handling | Integration/shape tests only |
+| CNN-LSTM / attention ConvLSTM / ensemble | Not found as independently selectable implementations | — | — | — | — | No evidence; not claimed | NOT IMPLEMENTED as distinct candidates |
+| Bundled point ConvLSTM | DEMO_ONLY | 8,701 | Six synthetic-derived 3×3×8 feature frames to a scalar score/probability | PyTorch inference; safe pinned checkpoint | Bundled synthetic artifact | Demonstrates model loading/API contract; no real event semantics or skill | Checksum, deterministic smoke and software tests only |
+
+Research-model counts were measured by instantiating the current default architecture; changing feature/grid/hidden dimensions changes the count. Classical model parameter count depends on fitted features/classes. Model selection status: `BLOCKED_BY_DATA`. No best model is selected.

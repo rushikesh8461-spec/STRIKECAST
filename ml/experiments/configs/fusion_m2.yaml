@@ -1,0 +1,33 @@
+# FusionConvLSTM trained on REAL M2 data, one encoder per M2 source
+# (satellite / nwp / radar / lightning), instead of the fusion_example.yaml
+# placeholder modalities ("radar"/"satellite" with made-up channel counts).
+#
+# As with convlstm_m2.yaml, `data:` here is a fallback only — when
+# data_source: m2, train.py replaces config.data with
+# DataContract.from_m2_bundle(bundle, multimodal=True), which reads
+# modality names/channel-counts from M2's channel schema `source` field
+# (src/training/m2_bridge.py:channel_groups_by_source) instead of hardcoding
+# them.
+data:
+  target_type: binary
+
+train:
+  seed: 42
+  batch_size: 2
+  num_workers: 0
+  learning_rate: 0.001
+  weight_decay: 0.0
+  epochs: 3
+  optimizer: adam
+  loss: bce
+  conv_hidden_dims: [8, 8]
+  conv_kernel_size: 3
+  checkpoint_dir: checkpoints
+  checkpoint_every_n_epochs: 1
+  device: cpu
+  model_name: fusion_convlstm
+  model_version: 0.1.0-m2
+
+  data_source: m2
+  m2_preprocessing_config: null
+  m2_demo: true

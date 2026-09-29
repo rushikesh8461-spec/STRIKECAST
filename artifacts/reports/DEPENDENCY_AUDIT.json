@@ -1,0 +1,17 @@
+{
+  "generated_at_utc": "2026-09-28T21:43:37.207095+00:00",
+  "status": "UNAVAILABLE",
+  "audits": [
+    {
+      "ecosystem": "python",
+      "status": "UNAVAILABLE",
+      "reason": "editable_or_unpinned_requirement_skipped"
+    },
+    {
+      "ecosystem": "npm",
+      "status": "UNAVAILABLE",
+      "reason": "registry_or_network_unavailable"
+    }
+  ],
+  "tls_verification_disabled": false
+}

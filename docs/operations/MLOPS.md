@@ -1,0 +1,3 @@
+# MLOps status
+
+The repository pins and safely loads a single DEMO checkpoint. It does not have an operational model registry, promotion process, canary rollout, drift monitoring, or automated retraining. Dataset validation and model evaluation/calibration utilities produce local outputs but do not promote a model. Training CLI is DEMO-only; evaluation requires supplied labels/probabilities, and calibration fits validation-only then reports against a separate test set without activation. LIVE mode returns unavailable until a separately accepted production artifact and provider pipeline are implemented and reviewed.

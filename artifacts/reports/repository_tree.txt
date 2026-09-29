@@ -1,0 +1,394 @@
+StrikeCast/
+|-- .github/
+|   `-- workflows/
+|       |-- ci.yml
+|       `-- security.yml
+|-- apps/
+|   |-- api/
+|   |   |-- strikecast_api/
+|   |   |   |-- __init__.py
+|   |   |   `-- main.py
+|   |   |-- tests/
+|   |   |   |-- test_api.py
+|   |   |   `-- test_lightning_security.py
+|   |   |-- README.md
+|   |   |-- requirements.txt
+|   |   `-- run_api.py
+|   `-- web/
+|       |-- e2e/
+|       |   `-- command-center.spec.ts
+|       |-- src/
+|       |   |-- app/
+|       |   |   |-- App.tsx
+|       |   |   |-- main.tsx
+|       |   |   |-- runtimeStatus.test.ts
+|       |   |   `-- runtimeStatus.ts
+|       |   |-- components/
+|       |   |   |-- Auth/
+|       |   |   |   `-- LoginPage.tsx
+|       |   |   |-- Dashboard/
+|       |   |   |   |-- AtmosphericConditions.tsx
+|       |   |   |   |-- ForecastChart.tsx
+|       |   |   |   `-- RiskCard.tsx
+|       |   |   `-- Three/
+|       |   |       `-- AtmosphericScene.tsx
+|       |   |-- map/
+|       |   |   |-- LightningLayer.tsx
+|       |   |   |-- RiskLayer.tsx
+|       |   |   `-- StrikeMap.tsx
+|       |   |-- products/
+|       |   |   |-- AnalyticProductOverlay.tsx
+|       |   |   `-- WeatherProductLayers.tsx
+|       |   |-- services/
+|       |   |   |-- apiClient.ts
+|       |   |   |-- geocodingApi.test.ts
+|       |   |   |-- geocodingApi.ts
+|       |   |   |-- lightningApi.ts
+|       |   |   |-- predictionApi.test.ts
+|       |   |   `-- predictionApi.ts
+|       |   |-- styles/
+|       |   |   `-- App.css
+|       |   |-- types/
+|       |   |   `-- prediction.ts
+|       |   |-- testSetup.ts
+|       |   `-- vite-env.d.ts
+|       |-- .dockerignore
+|       |-- .env.example
+|       |-- Dockerfile
+|       |-- index.html
+|       |-- nginx.conf
+|       |-- package-lock.json
+|       |-- package.json
+|       |-- playwright.config.ts
+|       |-- README.md
+|       |-- tsconfig.app.json
+|       |-- tsconfig.json
+|       |-- tsconfig.node.json
+|       `-- vite.config.ts
+|-- artifacts/
+|   |-- calibration/
+|   |-- metrics/
+|   |-- models/
+|   |   |-- candidate/
+|   |   |   `-- README.md
+|   |   |-- demo/
+|   |   |   |-- strikecast_convlstm_demo.json
+|   |   |   `-- strikecast_convlstm_demo.pt
+|   |   `-- production/
+|   |       `-- README.md
+|   `-- reports/
+|       |-- final_check.json
+|       `-- repository_tree.txt
+|-- configs/
+|   |-- research/
+|   |   |-- ingestion_config.yaml
+|   |   `-- preprocessing_config.yaml
+|   |-- app.yaml
+|   |-- data.yaml
+|   |-- model.yaml
+|   `-- risk.yaml
+|-- data/
+|   |-- demo/
+|   |   `-- research_multimodal/
+|   |       |-- lightning/
+|   |       |   |-- mock_lightning_network_v1_20260601T000000Z_20260601T110000Z.json
+|   |       |   `-- mock_lightning_network_v1_20260601T000000Z_20260601T110000Z.npz
+|   |       |-- metadata/
+|   |       |   `-- manifest.json
+|   |       |-- nwp/
+|   |       |   |-- mock_nwp_reanalysis_v1_20260601T000000Z_20260601T110000Z.json
+|   |       |   `-- mock_nwp_reanalysis_v1_20260601T000000Z_20260601T110000Z.npz
+|   |       |-- radar/
+|   |       |   |-- mock_radar_reflectivity_v1_20260601T000000Z_20260601T110000Z.json
+|   |       |   `-- mock_radar_reflectivity_v1_20260601T000000Z_20260601T110000Z.npz
+|   |       `-- satellite/
+|   |           |-- mock_geostationary_ir_v1_20260601T000000Z_20260601T110000Z.json
+|   |           `-- mock_geostationary_ir_v1_20260601T000000Z_20260601T110000Z.npz
+|   |-- interim/
+|   |-- manifests/
+|   |-- processed/
+|   |   `-- research/
+|   |       |-- dataset_metadata.json
+|   |       |-- normalization_stats.json
+|   |       |-- test.npz
+|   |       |-- train.npz
+|   |       `-- val.npz
+|   `-- raw/
+|-- docs/
+|   |-- api/
+|   |   `-- API.md
+|   |-- architecture/
+|   |   |-- ARCHITECTURE.md
+|   |   |-- DECISIONS.md
+|   |   `-- MIGRATION_MAP.md
+|   |-- archive/
+|   |   `-- INTEGRATION_AUDIT.md
+|   |-- data/
+|   |   |-- DATA_DICTIONARY.md
+|   |   |-- DATA_SOURCES.md
+|   |   `-- DATASET_CONTRACT.md
+|   |-- hackathon/
+|   |   `-- DEMO_MODE.md
+|   |-- ml/
+|   |   |-- CALIBRATION.md
+|   |   |-- EVALUATION.md
+|   |   |-- FEATURE_ENGINEERING.md
+|   |   |-- MODEL_CARD.md
+|   |   |-- MODEL_FEASIBILITY.md
+|   |   |-- MODEL_SELECTION.md
+|   |   |-- RISK_POLICY.md
+|   |   `-- TARGET_DEFINITION.md
+|   |-- operations/
+|   |   |-- DEPLOYMENT.md
+|   |   |-- EXTERNAL_PROVIDERS.md
+|   |   |-- METEOROLOGICAL-LAYERS.md
+|   |   |-- MLOPS.md
+|   |   |-- PRODUCTION_GATE.md
+|   |   `-- SECURITY.md
+|   |-- reports/
+|   |   |-- FEASIBILITY_MATRIX.md
+|   |   |-- FINAL_STRUCTURE_REPORT.md
+|   |   |-- FINAL_VERIFICATION_REPORT.md
+|   |   |-- RELIABILITY_SCORECARD.md
+|   |   |-- TEST_MATRIX.md
+|   |   |-- TESTING.md
+|   |   `-- VERIFICATION_REPORT.md
+|   |-- research/
+|   |   |-- m1_m2_contract.md
+|   |   |-- m2_m3_contract.md
+|   |   `-- m2_m3_integration.md
+|   `-- team-roles-reference.jpg
+|-- infra/
+|   |-- compose/
+|   |   `-- docker-compose.yml
+|   `-- docker/
+|       `-- api.Dockerfile
+|-- ml/
+|   |-- experiments/
+|   |   `-- configs/
+|   |       |-- convlstm_default.yaml
+|   |       |-- convlstm_m2.yaml
+|   |       |-- fusion_example.yaml
+|   |       `-- fusion_m2.yaml
+|   |-- research/
+|   |   |-- legacy_api/
+|   |   |   |-- api/
+|   |   |   |   |-- __init__.py
+|   |   |   |   |-- config.py
+|   |   |   |   |-- dependencies.py
+|   |   |   |   |-- inference_service.py
+|   |   |   |   |-- logging_config.py
+|   |   |   |   |-- main.py
+|   |   |   |   |-- model_loader.py
+|   |   |   |   |-- risk_engine.py
+|   |   |   |   |-- risk_service.py
+|   |   |   |   `-- schemas.py
+|   |   |   |-- mlops/
+|   |   |   |   |-- mlflow/
+|   |   |   |   |   |-- __init__.py
+|   |   |   |   |   `-- tracking.py
+|   |   |   |   `-- __init__.py
+|   |   |   `-- scripts/
+|   |   |       |-- run_api.py
+|   |   |       `-- run_mlflow.py
+|   |   |-- strikecast/
+|   |   |   |-- .github/
+|   |   |   |   `-- workflows/
+|   |   |   |-- data/
+|   |   |   |   |-- interim/
+|   |   |   |   `-- raw/
+|   |   |   |-- src/
+|   |   |   |   |-- features/
+|   |   |   |   |   |-- __init__.py
+|   |   |   |   |   |-- engineering.py
+|   |   |   |   |   `-- schema.py
+|   |   |   |   |-- inference/
+|   |   |   |   |   |-- __init__.py
+|   |   |   |   |   `-- predict.py
+|   |   |   |   |-- ingestion/
+|   |   |   |   |   |-- sources/
+|   |   |   |   |   |   |-- __init__.py
+|   |   |   |   |   |   |-- _grid_utils.py
+|   |   |   |   |   |   |-- lightning.py
+|   |   |   |   |   |   |-- nwp.py
+|   |   |   |   |   |   |-- radar.py
+|   |   |   |   |   |   `-- satellite.py
+|   |   |   |   |   |-- validation/
+|   |   |   |   |   |   |-- __init__.py
+|   |   |   |   |   |   |-- quality.py
+|   |   |   |   |   |   |-- schema.py
+|   |   |   |   |   |   |-- spatial.py
+|   |   |   |   |   |   `-- temporal.py
+|   |   |   |   |   |-- __init__.py
+|   |   |   |   |   |-- base.py
+|   |   |   |   |   |-- config.py
+|   |   |   |   |   |-- contract.py
+|   |   |   |   |   |-- demo_generator.py
+|   |   |   |   |   |-- metadata.py
+|   |   |   |   |   |-- providers.py
+|   |   |   |   |   |-- real_dataset.py
+|   |   |   |   |   `-- storage.py
+|   |   |   |   |-- models/
+|   |   |   |   |   |-- __init__.py
+|   |   |   |   |   |-- base.py
+|   |   |   |   |   |-- classical_ml.py
+|   |   |   |   |   |-- convlstm.py
+|   |   |   |   |   |-- convlstm_cell.py
+|   |   |   |   |   |-- factory.py
+|   |   |   |   |   |-- fusion.py
+|   |   |   |   |   |-- persistence.py
+|   |   |   |   |   `-- schema.py
+|   |   |   |   |-- preprocessing/
+|   |   |   |   |   |-- __init__.py
+|   |   |   |   |   |-- config.py
+|   |   |   |   |   |-- dataset.py
+|   |   |   |   |   |-- feature_pipeline.py
+|   |   |   |   |   |-- loading.py
+|   |   |   |   |   |-- missing_data.py
+|   |   |   |   |   |-- normalization.py
+|   |   |   |   |   |-- pipeline.py
+|   |   |   |   |   |-- sequence.py
+|   |   |   |   |   |-- spatial_alignment.py
+|   |   |   |   |   |-- split.py
+|   |   |   |   |   |-- target.py
+|   |   |   |   |   `-- temporal_alignment.py
+|   |   |   |   `-- __init__.py
+|   |   |   |-- .dockerignore
+|   |   |   |-- .env.example
+|   |   |   `-- .gitignore
+|   |   |-- README.md
+|   |   `-- requirements.txt
+|   `-- training/
+|       `-- strikecast_training/
+|           |-- __init__.py
+|           |-- checkpoint.py
+|           |-- config.py
+|           |-- dataset.py
+|           |-- losses.py
+|           |-- m2_bridge.py
+|           |-- seed.py
+|           `-- train.py
+|-- packages/
+|   `-- strikecast_core/
+|       |-- data/
+|       |   |-- __init__.py
+|       |   |-- atmospheric.py
+|       |   |-- lightning.py
+|       |   `-- README.md
+|       |-- evaluation/
+|       |   |-- __init__.py
+|       |   `-- metrics.py
+|       |-- features/
+|       |   |-- __init__.py
+|       |   |-- point.py
+|       |   `-- README.md
+|       |-- models/
+|       |   |-- __init__.py
+|       |   |-- inference.py
+|       |   |-- README.md
+|       |   `-- runtime_convlstm.py
+|       |-- risk/
+|       |   |-- __init__.py
+|       |   |-- engine.py
+|       |   `-- README.md
+|       |-- schemas/
+|       |   |-- __init__.py
+|       |   `-- api.py
+|       |-- security/
+|       |   |-- __init__.py
+|       |   `-- checkpoints.py
+|       `-- __init__.py
+|-- scripts/
+|   |-- data/
+|   |   `-- validate.py
+|   |-- development/
+|   |   |-- smoke_test.py
+|   |   |-- validate_configuration.py
+|   |   `-- validate_structure.py
+|   |-- ml/
+|   |   |-- calibrate.py
+|   |   |-- calibration_example.py
+|   |   |-- evaluate.py
+|   |   |-- train.py
+|   |   `-- validate_checkpoint.py
+|   `-- verification/
+|       `-- run_all_checks.py
+|-- tests/
+|   |-- research/
+|   |   `-- strikecast/
+|   |       |-- features/
+|   |       |   |-- __init__.py
+|   |       |   |-- test_feature_engineering.py
+|   |       |   `-- test_feature_schema.py
+|   |       |-- ingestion/
+|   |       |   |-- __init__.py
+|   |       |   |-- conftest.py
+|   |       |   |-- test_invalid_input_handling.py
+|   |       |   |-- test_metadata_generation.py
+|   |       |   |-- test_missing_data_detection.py
+|   |       |   |-- test_real_dataset.py
+|   |       |   |-- test_reproducibility.py
+|   |       |   |-- test_sample_demo_loading.py
+|   |       |   |-- test_schema_validation.py
+|   |       |   |-- test_source_loading.py
+|   |       |   |-- test_spatial_validation.py
+|   |       |   `-- test_timestamp_validation.py
+|   |       |-- models_pipeline/
+|   |       |   |-- __init__.py
+|   |       |   |-- test_inference.py
+|   |       |   |-- test_m2_integration.py
+|   |       |   |-- test_models.py
+|   |       |   |-- test_reproducibility.py
+|   |       |   `-- test_training.py
+|   |       |-- preprocessing/
+|   |       |   |-- __init__.py
+|   |       |   |-- conftest.py
+|   |       |   |-- test_channel_order.py
+|   |       |   |-- test_dataset_shapes.py
+|   |       |   |-- test_missing_data_handling.py
+|   |       |   |-- test_no_target_leakage.py
+|   |       |   |-- test_no_temporal_leakage.py
+|   |       |   |-- test_normalization.py
+|   |       |   |-- test_reproducibility.py
+|   |       |   |-- test_sequence_generation.py
+|   |       |   |-- test_spatial_alignment.py
+|   |       |   |-- test_target_generation.py
+|   |       |   |-- test_temporal_alignment.py
+|   |       |   |-- test_train_only_normalization_statistics.py
+|   |       |   `-- test_train_val_test_split.py
+|   |       |-- __init__.py
+|   |       |-- conftest.py
+|   |       |-- test_errors.py
+|   |       |-- test_health.py
+|   |       |-- test_inference.py
+|   |       |-- test_metadata.py
+|   |       |-- test_model_loader.py
+|   |       |-- test_models.py
+|   |       |-- test_pipeline_metadata_paths.py
+|   |       |-- test_predict.py
+|   |       |-- test_reproducibility.py
+|   |       |-- test_risk.py
+|   |       |-- test_schemas.py
+|   |       `-- test_training.py
+|   |-- unit/
+|   |   |-- data/
+|   |   |   |-- conftest.py
+|   |   |   `-- test_provider_contract.py
+|   |   `-- risk/
+|   |       |-- test_evaluation_utilities.py
+|   |       `-- test_thresholds.py
+|   `-- conftest.py
+|-- .dockerignore
+|-- .env.example
+|-- .gitignore
+|-- install-windows.bat
+|-- pyproject.toml
+|-- README.md
+|-- RELEASE_CHECKLIST.md
+|-- requirements-dev.txt
+|-- requirements.txt
+|-- run-all.ps1
+|-- run-all.sh
+|-- run-strikecast.bat
+|-- RUN-WINDOWS.md
+`-- stop-strikecast.bat

@@ -1,0 +1,37 @@
+# StrikeCast — M1 Ingestion Configuration
+# Safe to commit: no secrets/keys live here. Runtime credentials (if any
+# real external API is wired up later) must come from environment
+# variables — see .env.example.
+
+paths:
+  data_root: "data"
+  raw_subdir: "raw"
+  interim_subdir: "interim"
+  sample_demo_subdir: "demo/research_multimodal"
+
+# Spatial grid used by the sample/demo dataset and assumed as the default
+# MVP domain. Real adapters (Phase 2: Future/advanced) may define their own
+# native grids and M1 would then document the reprojection/subset applied.
+grid:
+  lat_min: 18.0
+  lat_max: 22.0
+  lon_min: 77.0
+  lon_max: 81.0
+  lat_resolution_deg: 0.25
+  lon_resolution_deg: 0.25
+  # -> n_lat = 17, n_lon = 17 (computed at runtime from bounds/resolution)
+
+quality_thresholds:
+  # missing_fraction above this -> quality_status = degraded
+  degraded_missing_fraction: 0.05
+  # missing_fraction above this -> quality_status = failed
+  failed_missing_fraction: 0.30
+  # coverage_fraction below this -> quality_status = failed regardless of missing_fraction
+  min_coverage_fraction: 0.50
+
+sample_demo:
+  random_seed: 42
+  n_timestamps: 12          # 12 steps -> e.g. hourly over half a day
+  timestep_minutes: 60
+  start_time_utc: "2026-06-01T00:00:00Z"
+  lightning_strikes_per_timestep_mean: 40

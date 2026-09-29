@@ -1,0 +1,29 @@
+[build-system]
+requires = ["setuptools>=65", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "strikecast"
+version = "0.1.0"
+requires-python = ">=3.11"
+
+[tool.pytest.ini_options]
+testpaths = ["tests", "apps/api/tests"]
+addopts = "-ra"
+pythonpath = ["packages", "apps/api", "ml/research/strikecast", "ml/research/legacy_api"]
+asyncio_default_fixture_loop_scope = "function"
+
+[tool.setuptools.packages.find]
+where = ["packages", "apps/api"]
+include = ["strikecast_core*", "strikecast_api*"]
+
+[tool.ruff]
+target-version = "py311"
+line-length = 120
+
+[tool.ruff.lint]
+select = ["E4", "E7", "E9", "F"]
+ignore = ["E402"]
+
+[tool.ruff.lint.per-file-ignores]
+"**/tests/**" = ["F401"]

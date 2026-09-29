@@ -1,0 +1,440 @@
+{
+  "generated_at_utc": "2026-09-28T21:45:14.593469+00:00",
+  "status": "READY_FOR_REAL_DATA",
+  "engineering_status": "READY_FOR_REAL_DATA",
+  "data_status": "BLOCKED_NO_DATA",
+  "model_status": "DEMO_ONLY",
+  "checks": [
+    {
+      "name": "repository_audit",
+      "status": "PASS",
+      "return_code": 0,
+      "command": [
+        "C:\\Users\\Rushikesh Patil\\AppData\\Local\\Programs\\Python\\Python311\\python.exe",
+        "scripts/security/audit_repository.py"
+      ],
+      "evidence": "completed; detailed command output is not retained to avoid logging untrusted data"
+    },
+    {
+      "name": "configuration_validation",
+      "status": "PASS",
+      "return_code": 0,
+      "command": [
+        "C:\\Users\\Rushikesh Patil\\AppData\\Local\\Programs\\Python\\Python311\\python.exe",
+        "scripts/development/validate_configuration.py"
+      ],
+      "evidence": "completed; detailed command output is not retained to avoid logging untrusted data"
+    },
+    {
+      "name": "secret_scan",
+      "status": "PASS",
+      "return_code": 0,
+      "command": [
+        "C:\\Users\\Rushikesh Patil\\AppData\\Local\\Programs\\Python\\Python311\\python.exe",
+        "scripts/security/audit_repository.py"
+      ],
+      "evidence": "completed; detailed command output is not retained to avoid logging untrusted data"
+    },
+    {
+      "name": "dependency_audit",
+      "status": "ENVIRONMENT_BLOCKED",
+      "return_code": 2,
+      "command": [
+        "C:\\Users\\Rushikesh Patil\\AppData\\Local\\Programs\\Python\\Python311\\python.exe",
+        "scripts/security/dependency_audit.py"
+      ],
+      "evidence": "completed; detailed command output is not retained to avoid logging untrusted data"
+    },
+    {
+      "name": "dataset_validation",
+      "status": "DATA_BLOCKED",
+      "return_code": 2,
+      "command": [
+        "C:\\Users\\Rushikesh Patil\\AppData\\Local\\Programs\\Python\\Python311\\python.exe",
+        "scripts/verification/validate_dataset.py"
+      ],
+      "evidence": "completed; detailed command output is not retained to avoid logging untrusted data"
+    },
+    {
+      "name": "era5_coverage_planner",
+      "status": "DATA_BLOCKED",
+      "evidence": "reused current-inventory manifest",
+      "manifest": "data/manifests/era5_required_coverage.json"
+    },
+    {
+      "name": "leakage_audit",
+      "status": "DATA_BLOCKED",
+      "return_code": 0,
+      "command": [
+        "C:\\Users\\Rushikesh Patil\\AppData\\Local\\Programs\\Python\\Python311\\python.exe",
+        "scripts/ml/leakage_audit.py",
+        "--allow-blocked"
+      ],
+      "evidence": "completed; detailed command output is not retained to avoid logging untrusted data"
+    },
+    {
+      "name": "checkpoint_integrity",
+      "status": "DEMO_ONLY",
+      "return_code": 0,
+      "command": [
+        "C:\\Users\\Rushikesh Patil\\AppData\\Local\\Programs\\Python\\Python311\\python.exe",
+        "scripts/ml/validate_checkpoint.py"
+      ],
+      "evidence": "completed; detailed command output is not retained to avoid logging untrusted data"
+    },
+    {
+      "name": "python_tests",
+      "status": "PASS",
+      "return_code": 0,
+      "command": [
+        "C:\\Users\\Rushikesh Patil\\AppData\\Local\\Programs\\Python\\Python311\\python.exe",
+        "-m",
+        "pytest",
+        "-q"
+      ],
+      "evidence": "completed; detailed command output is not retained to avoid logging untrusted data"
+    },
+    {
+      "name": "api_smoke",
+      "status": "PASS",
+      "return_code": 0,
+      "command": [
+        "C:\\Users\\Rushikesh Patil\\AppData\\Local\\Programs\\Python\\Python311\\python.exe",
+        "scripts/development/smoke_test.py"
+      ],
+      "evidence": "completed; detailed command output is not retained to avoid logging untrusted data"
+    },
+    {
+      "name": "docker_compose_yaml_static",
+      "status": "PASS",
+      "return_code": 0,
+      "command": [
+        "C:\\Users\\Rushikesh Patil\\AppData\\Local\\Programs\\Python\\Python311\\python.exe",
+        "-c",
+        "import yaml; from pathlib import Path; p=Path('infra/compose/docker-compose.yml'); d=yaml.safe_load(p.read_text(encoding='utf-8')); assert isinstance(d, dict) and {'api','web'} <= set(d.get('services', {}))"
+      ],
+      "evidence": "completed; detailed command output is not retained to avoid logging untrusted data"
+    },
+    {
+      "name": "frontend_typecheck",
+      "status": "PASS",
+      "return_code": 0,
+      "command": [
+        "npm",
+        "run",
+        "typecheck"
+      ],
+      "evidence": "completed; detailed command output is not retained to avoid logging untrusted data"
+    },
+    {
+      "name": "frontend_tests",
+      "status": "PASS",
+      "return_code": 0,
+      "command": [
+        "npm",
+        "test",
+        "--",
+        "--run"
+      ],
+      "evidence": "completed; detailed command output is not retained to avoid logging untrusted data"
+    },
+    {
+      "name": "frontend_e2e",
+      "status": "PASS",
+      "return_code": 0,
+      "command": [
+        "npm",
+        "run",
+        "test:e2e"
+      ],
+      "evidence": "completed; detailed command output is not retained to avoid logging untrusted data"
+    },
+    {
+      "name": "frontend_build",
+      "status": "PASS",
+      "return_code": 0,
+      "command": [
+        "npm",
+        "run",
+        "build"
+      ],
+      "evidence": "completed; detailed command output is not retained to avoid logging untrusted data"
+    },
+    {
+      "name": "docker_runtime",
+      "status": "ENVIRONMENT_BLOCKED",
+      "reason": "DOCKER_RUNTIME_UNAVAILABLE"
+    }
+  ],
+  "era5_coverage": {
+    "required_hours": 650,
+    "available_complete_hours": 4,
+    "missing_or_incomplete_hours": 646,
+    "required_hour_dates_utc": [
+      "2023-07-06",
+      "2023-07-07",
+      "2023-07-08",
+      "2023-07-09",
+      "2023-07-10",
+      "2023-07-11",
+      "2023-07-12",
+      "2023-07-13",
+      "2023-07-14",
+      "2023-07-15",
+      "2023-07-16",
+      "2023-07-17",
+      "2023-07-18",
+      "2023-07-19",
+      "2023-07-20",
+      "2023-07-21",
+      "2023-07-22",
+      "2023-07-23",
+      "2023-07-24",
+      "2023-07-25",
+      "2023-07-26",
+      "2023-07-27",
+      "2023-07-28",
+      "2023-07-29",
+      "2023-07-30",
+      "2023-07-31",
+      "2023-09-26",
+      "2023-09-28",
+      "2023-09-29",
+      "2023-09-30",
+      "2023-10-01",
+      "2023-10-02",
+      "2023-10-03",
+      "2023-10-04",
+      "2023-10-05",
+      "2023-10-06",
+      "2023-10-07",
+      "2023-10-08",
+      "2023-10-09",
+      "2023-10-10",
+      "2023-10-11",
+      "2023-10-12",
+      "2023-10-13",
+      "2023-10-14",
+      "2023-10-15",
+      "2023-10-16",
+      "2023-10-17",
+      "2023-10-18",
+      "2023-10-19",
+      "2023-10-20",
+      "2023-10-21",
+      "2023-10-22",
+      "2023-10-23",
+      "2023-10-24",
+      "2023-10-25",
+      "2023-10-26",
+      "2023-10-27",
+      "2023-10-28",
+      "2023-10-29",
+      "2023-10-30",
+      "2023-10-31",
+      "2023-11-01",
+      "2023-11-02",
+      "2023-11-03",
+      "2023-11-04",
+      "2023-11-05",
+      "2023-11-06",
+      "2023-11-07",
+      "2023-11-08",
+      "2023-11-09",
+      "2023-11-10",
+      "2023-11-11",
+      "2023-11-12",
+      "2023-11-13",
+      "2023-11-14",
+      "2023-11-15",
+      "2023-11-16"
+    ],
+    "missing_hour_dates_utc": [
+      "2023-07-06",
+      "2023-07-07",
+      "2023-07-08",
+      "2023-07-09",
+      "2023-07-10",
+      "2023-07-11",
+      "2023-07-12",
+      "2023-07-13",
+      "2023-07-14",
+      "2023-07-15",
+      "2023-07-16",
+      "2023-07-17",
+      "2023-07-18",
+      "2023-07-19",
+      "2023-07-20",
+      "2023-07-21",
+      "2023-07-22",
+      "2023-07-23",
+      "2023-07-24",
+      "2023-07-25",
+      "2023-07-26",
+      "2023-07-27",
+      "2023-07-28",
+      "2023-07-29",
+      "2023-07-30",
+      "2023-07-31",
+      "2023-09-26",
+      "2023-09-28",
+      "2023-09-29",
+      "2023-09-30",
+      "2023-10-01",
+      "2023-10-02",
+      "2023-10-03",
+      "2023-10-04",
+      "2023-10-05",
+      "2023-10-06",
+      "2023-10-07",
+      "2023-10-08",
+      "2023-10-09",
+      "2023-10-10",
+      "2023-10-11",
+      "2023-10-12",
+      "2023-10-13",
+      "2023-10-14",
+      "2023-10-15",
+      "2023-10-16",
+      "2023-10-17",
+      "2023-10-18",
+      "2023-10-19",
+      "2023-10-20",
+      "2023-10-21",
+      "2023-10-22",
+      "2023-10-23",
+      "2023-10-24",
+      "2023-10-25",
+      "2023-10-26",
+      "2023-10-27",
+      "2023-10-28",
+      "2023-10-29",
+      "2023-10-30",
+      "2023-10-31",
+      "2023-11-01",
+      "2023-11-02",
+      "2023-11-03",
+      "2023-11-04",
+      "2023-11-05",
+      "2023-11-06",
+      "2023-11-07",
+      "2023-11-08",
+      "2023-11-09",
+      "2023-11-10",
+      "2023-11-11",
+      "2023-11-12",
+      "2023-11-13",
+      "2023-11-14",
+      "2023-11-15"
+    ]
+  },
+  "lis_coverage": {
+    "readable_granules": 1128,
+    "domain_intersecting_granules": 177,
+    "domain_dates_utc": [
+      "2023-07-07",
+      "2023-07-08",
+      "2023-07-09",
+      "2023-07-10",
+      "2023-07-11",
+      "2023-07-12",
+      "2023-07-13",
+      "2023-07-14",
+      "2023-07-15",
+      "2023-07-16",
+      "2023-07-17",
+      "2023-07-18",
+      "2023-07-19",
+      "2023-07-20",
+      "2023-07-21",
+      "2023-07-22",
+      "2023-07-23",
+      "2023-07-24",
+      "2023-07-25",
+      "2023-07-26",
+      "2023-07-27",
+      "2023-07-28",
+      "2023-07-29",
+      "2023-07-30",
+      "2023-07-31",
+      "2023-09-26",
+      "2023-09-28",
+      "2023-09-29",
+      "2023-09-30",
+      "2023-10-01",
+      "2023-10-02",
+      "2023-10-03",
+      "2023-10-04",
+      "2023-10-05",
+      "2023-10-06",
+      "2023-10-07",
+      "2023-10-08",
+      "2023-10-09",
+      "2023-10-10",
+      "2023-10-11",
+      "2023-10-12",
+      "2023-10-13",
+      "2023-10-14",
+      "2023-10-15",
+      "2023-10-16",
+      "2023-10-17",
+      "2023-10-18",
+      "2023-10-19",
+      "2023-10-20",
+      "2023-10-21",
+      "2023-10-22",
+      "2023-10-23",
+      "2023-10-24",
+      "2023-10-25",
+      "2023-10-26",
+      "2023-10-27",
+      "2023-10-28",
+      "2023-10-29",
+      "2023-10-30",
+      "2023-10-31",
+      "2023-11-01",
+      "2023-11-02",
+      "2023-11-03",
+      "2023-11-04",
+      "2023-11-05",
+      "2023-11-06",
+      "2023-11-07",
+      "2023-11-08",
+      "2023-11-09",
+      "2023-11-10",
+      "2023-11-11",
+      "2023-11-12",
+      "2023-11-13",
+      "2023-11-14",
+      "2023-11-15",
+      "2023-11-16"
+    ]
+  },
+  "limitations": [
+    {
+      "type": "TYPE_A_CODE",
+      "limitation": "Canonical schema-driven ERA5 gridding, LIS observation grids, masked paired samples, chronological split, train-only normalization and ConvLSTM train/evaluate/calibrate/candidate artifact validation are implemented and fixture-tested.",
+      "status": "IMPLEMENTED"
+    },
+    {
+      "type": "TYPE_A_CODE",
+      "limitation": "Research-grid candidates do not satisfy the served point-model feature and normalization contract. They are explicitly marked INFERENCE_COMPATIBILITY=UNSUPPORTED; registry promotion and API loading reject them. Compatible registered point-contract candidates load only through the validated registry pointer.",
+      "status": "FAIL_CLOSED"
+    },
+    {
+      "type": "TYPE_B_DATA",
+      "limitation": "646 required ERA5 hours are missing or incomplete; no provenance-complete real paired training dataset exists.",
+      "status": "BLOCKED"
+    },
+    {
+      "type": "TYPE_C_ENVIRONMENT",
+      "limitation": "Dependency vulnerability scan or Docker runtime may be unavailable in the current environment; results are represented explicitly by individual checks.",
+      "status": "CHECKED"
+    },
+    {
+      "type": "TYPE_D_SCIENTIFIC",
+      "limitation": "LIS quality-flag acceptance and target-viewtime policy must be approved before observed non-lightning can become a negative label.",
+      "status": "OPEN"
+    }
+  ]
+}

@@ -1,0 +1,15 @@
+schema_version: strikecast-api-security-v1
+cors:
+  allow_credentials: false
+  origins_env: CORS_ORIGINS
+  wildcard_forbidden: true
+request_limits:
+  max_body_bytes_env: MAX_REQUEST_BYTES
+  rate_limit_env: RATE_LIMIT_REQUESTS
+  rate_limit_scope: process_local_not_distributed
+headers:
+  hsts: deployment_terminator_only
+  content_security_policy: default-src-none-api
+model:
+  selection_from_request: false
+  registry_only: true

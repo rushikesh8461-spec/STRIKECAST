@@ -1,0 +1,68 @@
+{
+  "timestamp_utc": "2026-09-28T11:51:05+00:00",
+  "verification_scope": "Real-data inventory and pairing audit; full Python suite; local API, frontend, Playwright, acceptance, configuration and checkpoint verification.",
+  "architecture": "PASS",
+  "migration": "COMPLETE",
+  "python": {
+    "collection": 348,
+    "passed": 348,
+    "failed": 0,
+    "skipped": 0,
+    "warnings": 7,
+    "compileall": "NOT_RUN_THIS_PASS"
+  },
+  "frontend": {
+    "unit_passed": 9,
+    "playwright_passed": 5,
+    "typecheck": "PASS",
+    "build": "PASS_WITH_CHUNK_WARNING"
+  },
+  "api_smoke": "PASS",
+  "security": {
+    "existing_security_tests": "PASS",
+    "ruff": "UNAVAILABLE_NOT_INSTALLED",
+    "pip_audit": "UNAVAILABLE_NOT_INSTALLED",
+    "npm_audit": "NOT_COMPLETED_TLS_CERTIFICATE_VERIFICATION_FAILED"
+  },
+  "structure": "NOT_RECHECKED_AFTER_THIS_PASS_BUILD_AND_TEST_OUTPUTS",
+  "configuration": "PASS (12 YAML files parsed)",
+  "docker": "UNVERIFIED_DOCKER_CLI_UNAVAILABLE",
+  "ci": "STATIC_REFERENCES_REVIEWED_HOSTED_CI_UNVERIFIED",
+  "model_status": "DEMO_ONLY",
+  "dataset_status": "RAW_FILES_INVENTORIED_NO_VALID_PAIRED_DATASET",
+  "held_out_evaluation": "NOT_ESTABLISHED",
+  "calibration_status": "NOT_VALIDATED",
+  "live_forecast_status": "BLOCKED",
+  "checkpoint_sha256": "63150034a809d39a4f60f0003f1de7786d7e9a51457c114adc02a25123ce8cfb",
+  "notes": [
+    "Latest full python -m pytest -q run: 347 passed, 0 failed, 0 skipped, 7 warnings in 24 seconds.",
+    "Configuration validator parsed 12 YAML files; acceptance validator confirmed the current record is BLOCKED; checkpoint validator confirmed DEMO_ONLY and expected SHA-256.",
+    "Structure validator passed after test-generated Python and pytest caches were removed.",
+    "No eligible real paired atmospheric/lightning dataset or held-out forecast predictions are present; no scientific skill, calibration, winner, or LIVE claim is made.",
+    "Frontend build/browser results are from the previous recorded verification; frontend sources were unchanged in this pass."
+  ],
+  "repository_tree": "artifacts/reports/repository_tree.txt",
+  "research_pipeline": {
+    "dataset_contract_code": "PASS",
+    "target_definition": "PASS",
+    "causal_missingness_and_temporal_availability_gates": "PASS",
+    "chronological_split_contract": "PASS",
+    "baseline_runner": "IMPLEMENTED_TESTED_REAL_DATA_BENCHMARK_BLOCKED",
+    "calibration_utility": "IMPLEMENTED_REAL_DATA_REVIEW_BLOCKED",
+    "model_acceptance_record": "PASS_BLOCKED"
+  },
+  "uploaded_data_inventory": "PASS_METADATA_ONLY",
+  "valid_real_paired_samples": 0,
+  "real_data_training": "BLOCKED_INVALID_ONE_HOUR_LABEL_COVERAGE",
+  "api_live_server_smoke": "PASS_DEMO_ONLY",
+  "frontend_this_pass": {
+    "unit_tests_passed": 9,
+    "typecheck": "PASS",
+    "build": "PASS_WITH_CHUNK_WARNING",
+    "playwright_passed": 5
+  },
+  "dependency_audit": {
+    "npm_audit": "INCOMPLETE_TLS_CERTIFICATE_VERIFICATION_FAILED",
+    "pip_audit": "INCOMPLETE_DID_NOT_FINISH"
+  }
+}

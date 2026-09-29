@@ -1,0 +1,7 @@
+schema_version: strikecast-local-deployment-v1
+mode: DEMO
+https_termination: external
+hsts_enabled_in_api: false
+api_origin_env: CORS_ORIGINS
+frontend_api_base_url_env: VITE_API_BASE_URL
+production_status: NOT_APPROVED

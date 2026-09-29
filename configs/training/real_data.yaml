@@ -1,0 +1,52 @@
+status: BLOCKED_UNTIL_VALID_PAIRED_DATA
+dataset_manifest: null
+feature_schema: configs/data/feature_schema.yaml
+target_schema_version: lightning_occurrence_at_horizon_v1
+target_policy:
+  status: PENDING_APPROVAL
+  policy_version: null
+  accepted_quality_flags: null
+  minimum_coverage_fraction: 1.0
+  negative_label_rule: complete_accepted_viewtime_only
+  viewtime_rule: half_open_interval_union
+  negative_label_requires_complete_observation: true
+sequence_length: 4
+forecast_horizon_steps: 1
+grid_resolution_degrees: 0.5
+seed: 42
+normalization:
+  method: z_score
+  fit_split: train
+  serialize_statistics: true
+splits:
+  method: chronological_whole_window
+  train_end: null
+  validation_end: null
+  embargo_steps: 1
+training:
+  model: ConvLSTMClassifier
+  max_epochs: 100
+  batch_size: 16
+  learning_rate: 0.001
+  optimizer: adam
+  scheduler: reduce_on_plateau
+  scheduler_patience: 5
+  scheduler_factor: 0.5
+  scheduler_min_learning_rate: 0.000001
+  early_stopping_patience: 12
+  conv_hidden_dims: [16, 16]
+  conv_kernel_size: 3
+  train_fraction: 0.70
+  validation_fraction: 0.15
+  seed: 42
+  device: cpu
+  class_weight: null
+  masked_target_loss: true
+  output_root: artifacts/models/candidate
+  overwrite: false
+limits:
+  max_source_file_size: 536870912
+  max_records_in_memory: 5000000
+  max_lis_records_in_memory: 5000000
+  max_grid_cells: 100000
+  max_sequence_length: 24

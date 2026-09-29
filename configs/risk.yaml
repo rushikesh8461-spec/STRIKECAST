@@ -1,0 +1,7 @@
+policy_version: provisional-1
+calibration_status: NOT_VALIDATED
+threshold_status: PROVISIONAL_UNVALIDATED
+thresholds:
+  moderate: 0.35
+  high: 0.60
+  severe: 0.80

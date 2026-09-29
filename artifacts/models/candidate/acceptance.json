@@ -1,0 +1,31 @@
+{
+  "record_type": "model_acceptance",
+  "record_version": "1",
+  "created_at": "2026-09-27T19:58:33Z",
+  "status": "BLOCKED",
+  "candidate": null,
+  "evidence": {
+    "real_dataset_contract_passed": false,
+    "reproducible_preprocessing": false,
+    "validation_evaluation_exists": false,
+    "untouched_test_evaluation_exists": false,
+    "required_rare_event_metrics_exist": false,
+    "calibration_review_passed": false,
+    "artifact_checksum_verified": false,
+    "lineage_metadata_complete": false,
+    "production_acceptance_criteria_passed": false
+  },
+  "unmet_requirements": [
+    "BLOCKED — REAL DATA REQUIRED",
+    "No real labeled dataset or independently reviewed source-quality report is supplied.",
+    "No validated temporal benchmark, held-out test evaluation, or calibration evidence exists.",
+    "No candidate model has been selected or registered."
+  ],
+  "scientific_status": {
+    "bundled_model": "DEMO_ONLY",
+    "dataset": "NOT_VALIDATED",
+    "held_out_evaluation": "NOT_ESTABLISHED",
+    "calibration": "NOT_VALIDATED",
+    "live_forecasting": "BLOCKED"
+  }
+}

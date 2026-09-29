@@ -1,0 +1,20 @@
+{
+  "generated_at_utc": "2026-09-28T21:43:38.086581+00:00",
+  "status": "BLOCKED_NO_DATA",
+  "dataset_count": 0,
+  "checks": {
+    "feature_availability_before_issue_time": "NOT_RUN_NO_DATASET",
+    "future_target_excluded_from_features": "NOT_RUN_NO_DATASET",
+    "normalization_fit_split_train_only": "NOT_RUN_NO_DATASET",
+    "whole_windows_do_not_overlap_splits": "NOT_RUN_NO_DATASET",
+    "calibration_and_selection_validation_only": "NOT_RUN_NO_DATASET",
+    "duplicate_samples_across_splits": "NOT_RUN_NO_DATASET",
+    "source_timestamp_cutoff": "NOT_RUN_NO_DATASET",
+    "calibration_samples_excluded_from_test": "NOT_RUN_NO_DATASET"
+  },
+  "datasets": [],
+  "limitations": [
+    "A valid result proves contract invariants in the prepared arrays and manifest; it does not independently prove provider timestamps or source-record uniqueness.",
+    "Raw ERA5/LIS pairing and source-level deduplication are not implemented as a canonical paired-data builder."
+  ]
+}
